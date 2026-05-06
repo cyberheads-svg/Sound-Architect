@@ -1,301 +1,355 @@
 <!DOCTYPE html>
 
-<html lang="ja">
+<html lang="en" style="background:#060608">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sound Architect: Female Vocal Edition</title>
+<title>Sound Architect: Female Vocal Edition v5</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&display=swap');
-  :root {
-    --bg:#060608;--panel:#0e0e12;--border:#1e1e28;--border2:#2a2a38;
-    --text:#c8c0d8;--muted:#5a5268;--dim:#2a2438;
-    --accent1:#c084fc;--accent2:#67e8f9;--accent3:#86efac;
-    --accent4:#fda4af;--accent5:#fcd34d;
-    --mono:'DM Mono',monospace;--serif:'DM Serif Display',serif;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--text);font-family:var(--mono);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:48px 20px 60px}
-  header{text-align:center;margin-bottom:40px}
-  .eyebrow{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-  h1{font-family:var(--serif);font-style:italic;font-size:clamp(26px,5vw,42px);color:#fff;font-weight:400;line-height:1.1}
-  h1 span{color:var(--accent1)}
-  .counter{font-size:10px;color:var(--dim);margin-top:8px;letter-spacing:.2em}
-  .card{width:100%;max-width:560px;background:var(--panel);border:1px solid var(--border);padding:32px;margin-bottom:20px}
-  .empty-state{text-align:center;padding:40px 0;color:var(--dim)}
-  .empty-icon{font-size:40px;margin-bottom:12px;opacity:.5}
-  .empty-text{font-size:12px;line-height:1.7;letter-spacing:.05em}
-  .fields{display:flex;flex-direction:column;gap:18px;margin-bottom:28px}
-  .field{display:grid;grid-template-columns:100px 1fr;gap:12px;align-items:start}
-  .field-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding-top:3px;line-height:1.4}
-  .field-value{font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.4}
-  .divider{border:none;border-top:1px solid var(--border);margin-bottom:20px}
-  .prompt-label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-  .prompt-text{font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:14px;word-break:break-word}
-  .copy-btn{background:transparent;border:1px solid var(--border2);color:var(--muted);padding:7px 18px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;font-family:var(--mono);transition:all .15s}
-  .copy-btn:hover{border-color:var(--accent1);color:var(--accent1)}
-  .copy-btn.copied{border-color:var(--accent3);color:var(--accent3)}
-  .generate-btn{width:100%;max-width:560px;background:transparent;border:1px solid #3a2a5a;color:var(--accent1);padding:16px;font-size:11px;letter-spacing:.35em;text-transform:uppercase;cursor:pointer;font-family:var(--mono);transition:all .2s;margin-bottom:12px}
-  .generate-btn:hover{background:#1a1228;border-color:var(--accent1)}
-  .save-btn{width:100%;max-width:560px;background:transparent;border:1px solid var(--border);color:var(--muted);padding:12px;font-size:10px;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;font-family:var(--mono);transition:all .2s;margin-bottom:40px}
-  .save-btn:hover{border-color:var(--border2);color:var(--text)}
-  .saved-section{width:100%;max-width:560px}
-  .saved-title{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border)}
-  .saved-item{background:var(--panel);border:1px solid var(--border);padding:14px 16px;margin-bottom:8px;font-size:11px;color:var(--muted);line-height:1.7;cursor:pointer;transition:border-color .15s}
-  .saved-item:hover{border-color:var(--border2);color:var(--text)}
-  footer{margin-top:20px;font-size:10px;color:var(--dim);letter-spacing:.15em;text-align:center}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-  .animate-in{animation:fadeIn .3s ease forwards}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #060608; color: #c8c0d8; font-family: 'DM Mono', monospace; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 48px 20px 60px; }
+  header { text-align: center; margin-bottom: 40px; }
+  .eyebrow { font-size: 10px; letter-spacing: .4em; text-transform: uppercase; color: #5a5268; margin-bottom: 10px; }
+  h1 { font-family: 'DM Serif Display', serif; font-style: italic; font-size: clamp(26px, 5vw, 42px); color: #fff; font-weight: 400; line-height: 1.1; }
+  h1 span { color: #c084fc; }
+  .counter { font-size: 10px; color: #2a2438; margin-top: 8px; letter-spacing: .2em; }
+  .card { width: 100%; max-width: 580px; background: #0e0e12; border: 1px solid #1e1e28; padding: 32px; margin-bottom: 20px; }
+  .empty-state { text-align: center; padding: 40px 0; color: #2a2438; }
+  .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: .5; }
+  .empty-text { font-size: 12px; line-height: 1.7; letter-spacing: .05em; }
+  .fields { display: flex; flex-direction: column; }
+  .field-row { display: grid; grid-template-columns: 110px 1fr auto; gap: 12px; align-items: start; padding: 11px 0; border-bottom: 1px solid #1e1e28; }
+  .field-row:last-child { border-bottom: none; }
+  .field-row.is-locked { background: #0c0a12; }
+  .field-row.is-cleared { opacity: .35; }
+  .field-label { font-size: 9px; letter-spacing: .15em; text-transform: uppercase; color: #5a5268; padding-top: 3px; }
+  .field-value { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 15px; line-height: 1.4; }
+  .field-value.cleared { font-family: 'DM Mono', monospace; font-style: normal; font-size: 11px; color: #2a2438 !important; }
+  .field-actions { display: flex; gap: 3px; align-items: center; }
+  .reroll-btn { background: transparent; border: none; color: #5a5268; font-size: 13px; cursor: pointer; padding: 2px 5px; line-height: 1; transition: color .15s; flex-shrink: 0; }
+  .reroll-btn:hover { color: #c084fc; }
+  .clear-btn { background: transparent; border: none; color: #2a2438; font-size: 11px; cursor: pointer; padding: 2px 4px; line-height: 1; transition: color .15s; flex-shrink: 0; }
+  .clear-btn:hover { color: #ef4444; }
+  .clear-btn.active { color: #ef4444; }
+  .lock-btn { background: transparent; border: none; color: #2a2438; font-size: 12px; cursor: pointer; padding: 2px 3px; line-height: 1; transition: all .15s; flex-shrink: 0; }
+  .lock-btn:hover { color: #5a5268; }
+  .lock-btn.locked { color: #c084fc; text-shadow: 0 0 6px #c084fc; }
+  .divider { border: none; border-top: 1px solid #1e1e28; margin: 20px 0; }
+  .prompt-label { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: #5a5268; margin-bottom: 8px; }
+  .prompt-text { font-family: 'DM Mono', monospace; font-size: 11px; color: #5a5268; line-height: 1.9; margin-bottom: 14px; word-break: break-word; cursor: pointer; padding: 10px; background: #060508; border: 1px solid #2a2a38; }
+  .prompt-text:hover { border-color: #c084fc; }
+  .copy-btn { background: transparent; border: 1px solid #2a2a38; color: #5a5268; padding: 7px 18px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; cursor: pointer; font-family: 'DM Mono', monospace; transition: all .15s; }
+  .copy-btn:hover { border-color: #c084fc; color: #c084fc; }
+  .copy-btn.copied { border-color: #86efac; color: #86efac; }
+  .generate-btn { width: 100%; max-width: 580px; background: transparent; border: 1px solid #3a2a5a; color: #c084fc; padding: 18px; font-size: 11px; letter-spacing: .35em; text-transform: uppercase; cursor: pointer; font-family: 'DM Mono', monospace; transition: all .2s; margin-bottom: 12px; }
+  .generate-btn:hover { background: #1a1228; border-color: #c084fc; }
+  .secondary-btns { display: flex; gap: 12px; width: 100%; max-width: 580px; margin-bottom: 24px; }
+  .evolve-btn, .batch-btn { flex: 1; background: transparent; border: 1px solid #2a2a38; color: #a5b4fc; padding: 14px; font-size: 10px; letter-spacing: .25em; text-transform: uppercase; cursor: pointer; font-family: 'DM Mono', monospace; transition: all .2s; }
+  .evolve-btn:hover { border-color: #a5b4fc; color: #c084fc; }
+  .batch-btn:hover { border-color: #67e8f9; color: #67e8f9; }
+  .save-btn { width: 100%; max-width: 580px; background: transparent; border: 1px solid #1e1e28; color: #5a5268; padding: 12px; font-size: 10px; letter-spacing: .25em; text-transform: uppercase; cursor: pointer; font-family: 'DM Mono', monospace; transition: all .2s; margin-bottom: 40px; }
+  .save-btn:hover { border-color: #2a2a38; color: #c8c0d8; }
+  .batch-section { width: 100%; max-width: 580px; margin-bottom: 32px; }
+  .batch-title { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: #5a5268; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #1e1e28; }
+  .batch-item { background: #0e0e12; border: 1px solid #2a2a38; padding: 16px; margin-bottom: 10px; font-size: 11px; color: #c8c0d8; line-height: 1.6; transition: border-color .15s; }
+  .batch-item:hover { border-color: #3a2a5a; }
+  .batch-actions { display: flex; gap: 8px; margin-top: 12px; }
+  .batch-actions button { flex: 1; background: transparent; border: 1px solid #2a2a38; color: #5a5268; padding: 8px 12px; font-size: 9px; letter-spacing: .15em; text-transform: uppercase; cursor: pointer; font-family: 'DM Mono', monospace; transition: all .15s; }
+  .batch-actions button:hover { border-color: #c084fc; color: #c084fc; }
+  .saved-section { width: 100%; max-width: 580px; }
+  .saved-title { font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: #5a5268; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid #1e1e28; }
+  .saved-item { background: #0e0e12; border: 1px solid #1e1e28; padding: 12px 14px; margin-bottom: 7px; font-size: 11px; color: #5a5268; line-height: 1.7; cursor: pointer; transition: border-color .15s; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .saved-item:hover { border-color: #2a2a38; color: #c8c0d8; }
+  footer { margin-top: 20px; font-size: 9px; color: #2a2438; letter-spacing: .15em; text-align: center; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .animate-in { animation: fadeIn .3s ease forwards; }
 </style>
 </head>
 <body>
-
 <header>
   <div class="eyebrow">Suno AI · Style Generator</div>
   <h1>Sound <span>Architect</span></h1>
-  <div class="eyebrow" style="margin-top:4px">Female Vocal Edition v4.1</div>
+  <div class="eyebrow" style="margin-top:4px">Female Vocal Edition v5</div>
   <div class="counter" id="counter">— generated</div>
 </header>
-
-<div class="card" id="card">
+<div class="card">
   <div class="empty-state" id="emptyState">
     <div class="empty-icon">♀</div>
-    <div class="empty-text">ボタンを押してスタイルを生成<br>Sunoにそのままコピーできます</div>
+    <div class="empty-text">Press Generate to build a Suno style prompt.<br>Lock any field to keep it on the next generate.</div>
   </div>
-  <div id="result" style="display:none"></div>
+  <div id="displayFields" class="fields animate-in" style="display:none"></div>
+  <div id="promptBox" style="display:none">
+    <hr class="divider">
+    <div class="prompt-label">Copy to Suno</div>
+    <div class="prompt-text" id="promptText" onclick="copyPrompt()"></div>
+    <button class="copy-btn" id="copyBtn" onclick="copyPrompt()">Copy</button>
+  </div>
 </div>
-
-<button class="generate-btn" onclick="generate()">GENERATE STYLE</button>
-<button class="save-btn" onclick="savePrompt()" id="saveBtn" style="display:none">SAVE THIS PROMPT</button>
-
+<button class="generate-btn" onclick="generateAll()">GENERATE STYLE</button>
+<div class="secondary-btns">
+  <button class="evolve-btn" onclick="evolvePrompt()">EVOLVE</button>
+  <button class="batch-btn" onclick="generateBatch(5)">GENERATE 5</button>
+</div>
+<button class="save-btn" id="saveBtn" onclick="savePrompt()" style="display:none">SAVE THIS PROMPT</button>
+<div class="batch-section" id="batchSection" style="display:none">
+  <div class="batch-title">BATCH RESULTS (5)</div>
+  <div id="batchList"></div>
+</div>
 <div class="saved-section" id="savedSection" style="display:none">
   <div class="saved-title">Saved Prompts</div>
   <div id="savedList"></div>
 </div>
-
-<footer>100 × 100 × 100 × 100 patterns · subgenre linked · GitHub Pages ready</footer>
-
+<footer>Lock · Reroll · Clear · EVOLVE · Batch · Suno AI ready</footer>
 <script>
-const VOCALS=["husky female vocal","smoky alto","breathy soprano","ethereal falsetto","raw punk shout","warm mezzo-soprano","crystalline soprano","tender indie croon","powerful belt","whispery intimate","deep contralto","jazz scat vocal","operatic mezzo","nasal indie tone","sultry R&B voice","sharp post-punk vocal","airy head voice","gritty blues shout","fragile childlike voice","velvet torch singer","androgynous alto","fierce metal screech","lounge singer croon","robotic vocoder female","folk soprano","hypnotic chant","spoken word delivery","bright kawaii vocal","dark baritone-range female","melismatic gospel voice","detached cold wave vocal","dramatic cabaret voice","intimate bedroom whisper","layered harmony texture","piercing high note","raspy rock female","soft lullaby voice","urgent protest vocal","smoky bossa nova","deadpan talk-sing","trembling vibrato","clear bell-tone soprano","breathy jazz chanteuse","aggressive riot grrrl","tender alt-country croon","glitchy processed female","soulful ad-lib heavy","hollow distant voice","theatrical mezzo","warm gospel lead","icy synth-pop vocal","raw confessional indie","ecstatic free jazz improvisation","husky neo-soul","plaintive folk wail","bright ska vocalist","eerie modal chant","punchy hip-hop flow","cinematic female narrator","restrained minimalist tone","soaring power ballad voice","dry sardonic indie","lush baroque soprano","intimate spoken word","nostalgic 60s pop","processed ambient hum","wild avant-garde squeal","tender Appalachian mountain voice","rhythmic funk delivery","cool bossa nova","fiery flamenco-influenced","polished studio pop","raw cassette bedroom","rich mezzo with vibrato","sharp new wave","weightless ambient vocal","emotional trap vocal","breathy trip-hop","haunted gothic soprano","direct punk monotone","sweet twee pop","dramatic torch song","gravelly blues woman","sighing impressionist","precise classical crossover","wild psych rock wail","intimate piano bar","cool jazz bebop","gentle Scandinavian folk","bold Afrobeat lead","melancholic slowcore","tense post-rock build","playful indie pop","dreamy reverb-drenched","fierce conscious rap","silk and gravel alto","breathy art song soprano","nasal lo-fi indie","commanding contralto","fragile head voice"];
+const VOCALS = ["husky female vocal","smoky alto","breathy soprano","ethereal falsetto","raw punk shout","warm mezzo-soprano","crystalline soprano","tender indie croon","powerful belt","whispery intimate","deep contralto","jazz scat vocal","operatic mezzo","nasal indie tone","sultry R&B voice","sharp post-punk vocal","airy head voice","gritty blues shout","fragile childlike voice","velvet torch singer","androgynous alto","fierce metal screech","lounge singer croon","robotic vocoder female","folk soprano","hypnotic chant","spoken word delivery","bright kawaii vocal","dark baritone-range female","melismatic gospel voice","detached cold wave vocal","dramatic cabaret voice","intimate bedroom whisper","layered harmony texture","piercing high note","raspy rock female","soft lullaby voice","urgent protest vocal","smoky bossa nova","deadpan talk-sing","trembling vibrato","clear bell-tone soprano","breathy jazz chanteuse","aggressive riot grrrl","tender alt-country croon","glitchy processed female","soulful ad-lib heavy","hollow distant voice","theatrical mezzo","warm gospel lead","icy synth-pop vocal","raw confessional indie","ecstatic free jazz improvisation","husky neo-soul","plaintive folk wail","bright ska vocalist","eerie modal chant","punchy hip-hop flow","cinematic female narrator","restrained minimalist tone","soaring power ballad voice","dry sardonic indie","lush baroque soprano","intimate spoken word","nostalgic 60s pop","processed ambient hum","wild avant-garde squeal","tender Appalachian mountain voice","rhythmic funk delivery","cool bossa nova","fiery flamenco-influenced","polished studio pop","raw cassette bedroom","rich mezzo with vibrato","sharp new wave","weightless ambient vocal","emotional trap vocal","breathy trip-hop","haunted gothic soprano","direct punk monotone","sweet twee pop","dramatic torch song","gravelly blues woman","sighing impressionist","precise classical crossover","wild psych rock wail","intimate piano bar","cool jazz bebop","gentle Scandinavian folk","bold Afrobeat lead","melancholic slowcore","tense post-rock build","playful indie pop","dreamy reverb-drenched","fierce conscious rap","silk and gravel alto","breathy art song soprano","nasal lo-fi indie","commanding contralto","fragile head voice"];
+const VOCAL_NUANCES = ["breathy and intimate delivery","with subtle rasp and grit","warm chest voice with gentle vibrato","powerful belting on high notes","soft head voice with airy falsetto","husky and slightly gritty texture","ethereal and reverb-drenched tone","raw emotional delivery with cracks","smooth and polished legato","sharp and aggressive attack","fragile and trembling vibrato","confident and direct phrasing","dreamy and distant atmosphere","intimate close-mic whisper","full-bodied and resonant chest voice","light and floaty head voice","raspy rock edge with attitude","warm and comforting tone","cold and detached delivery","passionate and fiery expression","subtle growl on low notes","bright and clear bell-like tone","dark and smoky atmosphere","playful and bouncy phrasing","melancholic and longing delivery","urgent and tense attack","soft and soothing lullaby feel","powerful and soaring belt","intimate and vulnerable tone","sharp staccato phrasing","smooth and silky legato","raw and unpolished honesty","polished studio sheen","ethereal layered harmonies","gritty blues shout energy","tender and fragile emotion","confessional and personal feel","dramatic and theatrical flair","light and airy falsetto runs","heavy emotional vibrato","dry and direct delivery","warm analog tape warmth","crisp and modern production","intimate bedroom recording feel","cinematic and spacious reverb"];
+const GENRES = ["dream pop","shoegaze","jazz noir","trip-hop","darkwave","lo-fi folk","hyperpop","gothic Americana","synth-pop","post-punk revival","chamber pop","ambient folk","neo-soul","bedroom pop","krautrock","slowcore","art rock","noise pop","bossa nova influenced","cold wave","psychedelic soul","indie chanson","afro-shoegaze","space country","post-rock","experimental folk","baroque pop","electronic folk","contemporary folk","ambient country","indie R&B","UK garage-influenced indie","art folk","noir cabaret","Appalachian folk","4AD-inspired","witch house","chillwave","vaporwave","ethereal wave","freak folk","anti-folk","sadcore","twee pop","math rock","midwest emo","skate punk","melodic hardcore","riot grrrl","post-hardcore","singer-songwriter jazz","contemporary classical crossover","minimal techno pop","industrial pop","EBM influenced","tribal ambient","sacred minimalism","drone folk","musique concrète pop","microtonal indie","cumbia influenced","tango electrónico","fado inspired","chanson nouvelle vague","Nordic folk","Afropop indie","highlife influenced","Cape Verde morna","Turkish psychedelia influenced","Balkan indie","city pop revival","shibuya-kei inspired","enka influenced","kayokyoku revival","J-folk","Tropicália influenced","MPB influenced","nueva canción","tango electrónico","mambo indie","coastal ambient","desert blues","mountain folk","urban folk","harbor noir","retrofuturist pop","cassette punk","lo-fi soul","analog warmth pop","tape hiss folk","maximalist baroque pop","deconstructed club","ambient techno","dark disco","cosmic funk","new weird America","freak folk revival","psychedelic country","acid folk","occult folk"];
+const SUBGENRES = {"dream pop":["lush dream pop","slowgaze","ethereal pop","cloud pop","oceanic pop","shimmer pop","soft focus pop","hazy dream pop","velvet dream pop"],"shoegaze":["blackgaze","nu-gaze","space rock","noise pop","fuzz pop","heavenly voices shoegaze","post-shoegaze","guitar cloud","drone shoegaze"],"jazz noir":["torch jazz","dark jazz","cinematic jazz","film noir jazz","cool jazz noir","brooding bebop","late night jazz","smoky jazz","subterranean jazz"],"trip-hop":["downbeat","abstract hip-hop","dark trip-hop","cinematic trip-hop","lo-fi trip-hop","Bristol sound","illbient","beat poetry","dub trip-hop"],"darkwave":["ethereal darkwave","neoclassical darkwave","cold wave darkwave","goth darkwave","minimal darkwave","synth darkwave","post-punk darkwave","bat cave","romantic darkwave"],"lo-fi folk":["cassette folk","bedroom folk","outsider folk","home recording folk","lo-fi acoustic","tape folk","DIY folk","rough folk","imperfect folk"],"hyperpop":["bubblegum bass","digicore","glitchpop","PC music","maximalist pop","kawaii metal pop","turbo pop","sugar rave","speed pop"],"gothic Americana":["death country","dark country","murder ballad folk","gothic folk","Southern gothic","Appalachian gothic","dust bowl gothic","cemetery country","haunted Americana"],"synth-pop":["electropop","coldwave synth","minimal synth","new wave pop","retro synth","futurist pop","analog pop","dark synth-pop","dance synth"],"post-punk revival":["angular indie","dance punk","art punk","no wave revival","neo post-punk","tense indie rock","dry punk","wire-influenced","minimal post-punk"],"chamber pop":["orchestral indie","baroque indie","string pop","cinematic chamber","classical crossover pop","intimate orchestral","neo-baroque","salon pop","parlour pop"],"ambient folk":["drone folk","pastoral ambient","meditative folk","nature sound folk","slow folk ambient","quiet folk","still folk","field folk","breath folk"],"neo-soul":["future soul","organic soul","conscious soul","smooth neo-soul","jazz-influenced R&B","lush soul","warm soul","electric soul","spiritual soul"],"bedroom pop":["lo-fi indie","home studio pop","cassette pop","DIY indie pop","soft bedroom rock","intimate pop","4-track pop","duvet pop","home recording indie"],"krautrock":["motorik rock","cosmic rock","kosmische Musik","psych kraut","minimal motorik","progressive kraut","trance rock","drone rock","repetition rock"],"slowcore":["sadcore","minimal rock","quiet rock","sparse indie","glacial indie","spare slowcore","hushed rock","still rock","barely there rock"],"art rock":["avant-pop","experimental rock","progressive pop","complex rock","cerebral rock","concept rock","avant-rock","art pop","difficult pop"],"noise pop":["fuzz pop","distortion pop","lo-fi noise","abrasive pop","wall of sound pop","blown-out pop","feedback pop","scuzz pop","harsh pop"],"bossa nova influenced":["neo bossa","contemporary bossa","jazz bossa","soft samba","Brazilian jazz pop","gentle bossa","cool bossa","intimate bossa","late afternoon bossa"],"cold wave":["minimal cold wave","French cold wave","dark minimal","icy post-punk","severe minimal","stark wave","frozen wave","grey wave","concrete wave"],"psychedelic soul":["cosmic soul","acid soul","trippy R&B","psych funk","mind expanding soul","spiritual soul","transcendent soul","lysergic soul","expanded soul"],"indie chanson":["nouvelle chanson","contemporary chanson","indie French pop","poetic pop","literary pop","café pop","romantic indie","rive gauche pop","post-chanson"],"afro-shoegaze":["Afro noise pop","Lagos shoegaze","African fuzz","West African indie","Afrobeat shoegaze","continental noise","pan-African indie","tropical noise","Lagos fuzz"],"space country":["cosmic country","astral Americana","psychedelic country","outer space folk","astro twang","galaxy country","deep space Western","interstellar twang","psych twang"],"post-rock":["cinematic post-rock","epic post-rock","instrumental rock","crescendo rock","atmospheric rock","drone rock","ambient rock","math post-rock","orchestral post-rock"],"experimental folk":["avant-folk","abstract folk","deconstructed folk","sound poetry folk","noise folk","extended folk","free folk","difficult folk","anti-folk experimental"],"baroque pop":["neo-baroque","orchestral pop","harpsichord pop","classical pop","formal pop","courtly pop","gilded pop","chamber pop baroque","lavish pop"],"electronic folk":["folktronica","digital folk","electro-acoustic folk","synth folk","hybrid folk","folk electronics","acoustic electronic","laptop folk","circuit folk"],"contemporary folk":["new folk","singer-songwriter folk","indie folk","modern acoustic","narrative folk","confessional folk","literary folk","kitchen table folk","honest folk"],"ambient country":["pedal steel ambient","country drone","desolate Americana","vast country","desert ambient country","empty plains sound","still country","horizon country","open road ambient"],"indie R&B":["alternative R&B","art R&B","experimental soul","future R&B","minimal R&B","bedroom R&B","intimate soul","left-field R&B","soft R&B"],"UK garage-influenced indie":["post-garage indie","South London sound","grime-touched indie","urban indie","estate indie","London bass indie","garage pop","2-step indie","urban indie pop"],"art folk":["conceptual folk","theatrical folk","performance folk","literary folk art","song-as-art","composed folk","formal folk","gallery folk","installation folk"],"noir cabaret":["dark cabaret","Weimar-influenced","Berlin cabaret","theatrical noir","chanson noir","torch noir","decadent cabaret","expressionist song","smoky cabaret"],"Appalachian folk":["mountain music","old-time folk","shape note folk","hollerin folk","dulcimer folk","Scots-Irish folk","sacred harp inspired","hollow folk","ridge music"],"4AD-inspired":["ethereal 4AD","dream 4AD","pale saints inspired","cocteau twins influenced","This Mortal Coil sound","lush shimmer","celestial 4AD","heavenly voices","gossamer pop"],"witch house":["drag","haunted house music","occult electronic","dark ritual house","slowed trap goth","black house","seance music","hex music","spell pop"],"chillwave":["glo-fi","memory wave","nostalgia wave","soft synth pop","hazy summer electronic","warm lo-fi synth","pastel wave","sun-faded pop","haze pop"],"vaporwave":["mallsoft","future funk","late capitalism aesthetic","slowed and reverbed","aesthetic vaporwave","Macintosh Plus sound","plunderphonics pop","elevator pop","ghost mall"],"ethereal wave":["heavenly voices","celestial goth","angelic darkwave","shimmer goth","sacred darkwave","luminous wave","transcendent goth","cloud goth","seraphic wave"],"freak folk":["psych folk","weird folk","strange folk","outsider folk psych","animal collective influenced","free weird folk","eccentric folk","forest folk","troll folk"],"anti-folk":["East Village folk","cynical folk","punk folk","ironic folk","spoken word folk","confrontational acoustic","raw folk","protest lite","sarcastic folk"],"sadcore":["grief pop","tearjerker indie","devastating folk","heartbreak music","slow sad indie","quietly destroyed","sorrow pop","loss music","dirge pop"],"twee pop":["C86 sound","jangly twee","cutesy indie","indiepop twee","cardigan pop","shy pop","gentle indie","daisy pop","sweet indie"],"math rock":["emo math","technical indie","odd meter rock","angular math","polyrhythmic indie","Midwest math","guitar nerd rock","precision rock","time sig rock"],"midwest emo":["skramz","twinkle emo","Midwest screamo","Kalamazoo sound","midwestern sadness","DIY emo","cap n jazz influenced","emo revival","heartland emo"],"skate punk":["melodic skate punk","Epitaph punk","fast melodic punk","Californian skate","pop punk skate","Fat Wreck sound","SoCal punk","beach punk","surf punk"],"melodic hardcore":["melodic HC","fast melodic punk","emotional hardcore","post-hardcore melodic","harmony hardcore","tuneful HC","bridge nine sound","anthem HC","sing-along HC"],"riot grrrl":["feminist punk","Olympia sound","girl punk","DIY feminist rock","zine punk","empowerment rock","angry girl music","bedroom riot","third wave punk"],"post-hardcore":["screamo","emotional hardcore","complex HC","art hardcore","experimental post-HC","angular hardcore","sung and screamed","cry core","math HC"],"singer-songwriter jazz":["piano trio songwriter","intimate jazz song","confessional jazz","lyrical jazz","poetic jazz song","jazz balladry","warm jazz writing","narrative jazz","personal jazz"],"contemporary classical crossover":["neoclassical pop","post-classical song","composed pop","art pop classical","orchestral singer-songwriter","chamber singer-songwriter","formal pop","serious pop","classical adjacent"],"minimal techno pop":["stripped techno pop","clean electronic pop","minimalist club pop","lean synth pop","stark dance pop","cold minimal pop","zero ornament pop","clinical pop","functional pop"],"industrial pop":["EBM pop","harsh electronic pop","industrial dance","metal machine pop","hard electronic song","abrasive synth pop","power noise pop","machine pop","factory pop"],"EBM influenced":["body music","electronic body","hard EBM","minimal body music","German electronic influenced","clinical dance","functional electronic","body music pop","march electronic"],"tribal ambient":["ritual ambient","shamanic drone","ceremonial sound","indigenous-influenced ambient","earth ritual music","trance ceremony","primal ambient","bone music","drum circle ambient"],"sacred minimalism":["holy minimalism","spiritual minimalism","tintinnabuli","arvo pärt influenced","silence-based","sacred drone","devotional minimalism","monastery pop","prayer ambient"],"drone folk":["drone acoustic","sustained folk","long tone folk","meditative acoustic","drone country","bowed folk","endless folk","bow folk","sustained acoustic"],"musique concrète pop":["found sound pop","object music pop","tape manipulation song","concrete song","phonographic pop","noise source pop","assembled sound pop","kitchen pop","world as instrument"],"microtonal indie":["quarter tone pop","alternate tuning indie","xenharmonic folk","just intonation song","out of tune indie","detuned pop","alternate scale folk","strange tuning","wolf tone pop"],"cumbia influenced":["tropical cumbia","urban cumbia","cumbia pop","digital cumbia","dark cumbia","cumbia indie","South American rhythm pop","nortec cumbia","psychedelic cumbia"],"tango electrónico":["dark tango","nuevo tango","tango electrónico","cinematic tango","melancholic tango","Buenos Aires noir","tango art song","existential tango","late tango"],"fado inspired":["contemporary fado","fado pop","Lisbon soul","saudade pop","morna-fado fusion","maritime sorrow","Portuguese melancholy","fado moderno","neo-fado"],"chanson nouvelle vague":["nouvelle chanson","French new wave song","poetic French pop","cinematic chanson","intellectual pop song","Rive Gauche sound","Parisian indie","literary French pop","existentialist pop"],"Nordic folk":["Scandinavian folk","Nordic melancholy","Finnish folk","Swedish folk pop","Norwegian mountain music","Arctic folk","Norse song","fjord folk","tundra folk"],"Afropop indie":["Afrobeats indie","West African indie pop","pan-African pop","continental indie","Lagos pop","Accra indie","Nairobi sound","Afro indie","pan-African indie"],"highlife influenced":["Ghanaian highlife pop","electric highlife","urban highlife","guitar highlife","Afro-jazz pop","jùjú influenced","palm wine pop","Lagos highlife","modern highlife"],"Cape Verde morna":["morna pop","saudade Atlantic","island melancholy","Cesária Évora influenced","Cape Verdean soul","Atlantic folk","ocean sorrow","island folk","Atlantic melancholy"],"Turkish psychedelia influenced":["Anatolian rock","Turkish psych","Eastern psychedelia","Bosphorus psych","Arabesque psych","Ottoman psych","Istanbul psych","Anadolu pop","Eastern electric"],"Balkan indie":["Balkan folk pop","Eastern European indie","klezmer-influenced indie","Romani-influenced pop","Balkan beat pop","ex-Yugoslav indie","crossroads sound","Ottoman indie","Byzantine pop"],"city pop revival":["Japanese city pop","80s city pop","sophisticated pop","urban contemporary Japan","yacht city pop","Shibuya sound revival","melodic city pop","Tokyo night pop","Nippon city pop"],"shibuya-kei inspired":["Shibuya-kei pop","sophisticated Japanese indie","Pizzicato Five influenced","Cornelius-inspired","eclecticist Japanese pop","reference pop","library music pop","catalogue pop","cinephile pop"],"enka influenced":["modern enka","enka pop","kayokyoku-enka","neo-enka","contemporary Japanese ballad","Nikkei pop","emotional Japanese pop","kouta influenced","sentimental J-pop"],"kayokyoku revival":["70s Japanese pop revival","melodic Japanese pop","nostalgic J-pop","showa song revival","kayo pop","gentle J-pop","warm Japanese melody","analog J-pop","vintage J-pop"],"J-folk":["Japanese folk pop","acoustic J-folk","Japanese singer-songwriter","yuming-influenced","soft Japanese acoustic","J-folk ballad","gentle Japanese folk","nihon folk","Japanese acoustic singer"],"Tropicália influenced":["tropicalist pop","Brazilian modernist","carnivalesque rock","bossa tropicália","psychedelic samba","MPB avant-garde","Rio psych","concrete tropicalism","Brazilian psych"],"MPB influenced":["música popular brasileira","Brazilian popular song","sophisticated Brazilian","samba canção modern","bossa MPB","urban Brazilian","contemporary samba song","carioca pop","São Paulo song"],"nueva canción":["Latin protest folk","South American folk song","nueva trova","poetic Latin folk","Chilean nueva canción","Andean folk song","political Latin folk","liberation folk","guitar protest"],"tango electrónico":["electronic tango","Gotan Project influenced","modern tango","digital tango","urban tango","tango fusion","Buenos Aires electronic","techno tango","nuevo electronic tango"],"mambo indie":["Latin indie","tropical indie","mambo pop","salsa-influenced indie","pan-Latino indie","Nuyorican sound","Latin alternative","tropical alternative","barrio pop"],"coastal ambient":["ocean ambient","shore drone","maritime atmosphere","wave sound","tidal ambient","beach ambient","harbour sound","sea foam ambient","salt air drone"],"desert blues":["Saharan blues","Tuareg blues","North African blues","nomadic blues","sand guitar","desert rock blues","Timbuktu blues","Mali blues","dune folk"],"mountain folk":["highland folk","peak folk","altitude music","mountain ballad","ridge song","summit folk","elevation acoustic","high altitude folk","glacier folk"],"urban folk":["city folk","pavement folk","subway folk","concrete acoustic","metropolitan folk","street corner song","urban acoustic","sidewalk song","transit folk"],"harbor noir":["port city blues","dockside jazz","maritime noir","shipping lane blues","foghorn music","coastal darkness","wharf melancholy","sailors song","fog noir"],"retrofuturist pop":["retro sci-fi pop","space age pop revival","atomic age aesthetic","Jetsons sound","1960s future pop","silver age synth","optimistic future pop","jet age pop","googie pop"],"cassette punk":["tape punk","lo-fi punk","DIY cassette rock","home recorded punk","4-track punk","boombox punk","rough cassette","boom box rock","hiss punk"],"lo-fi soul":["bedroom soul","lo-fi R&B","rough soul","cassette soul","imperfect soul","human soul","warm lo-fi soul","tape soul","analog soul"],"analog warmth pop":["tape warmth song","warm production pop","vintage analog pop","tube warmth music","organic pop","natural sound pop","imperfect warmth","reel to reel pop","analog comfort"],"tape hiss folk":["static folk","hiss acoustic","imperfect recording folk","weathered folk","degraded beauty folk","worn tape song","crackling folk","eroded folk","failing tape folk"],"maximalist baroque pop":["orchestral maximalism","lavish pop","dense arrangement pop","epic baroque","over-the-top orchestral","grandiose chamber","excessive beauty","maximalist chamber","lush overload"],"deconstructed club":["post-club","abstract dance","conceptual club music","broken club","shattered dance","art club","anti-dance dance","ruins club","club debris"],"ambient techno":["Berlin ambient","minimal ambient techno","drone techno","isolationist techno","deep ambient electronic","techno meditation","sustained techno","long form techno","trance ambient"],"dark disco":["Italo dark","moody disco","noir disco","shadow disco","underground disco","subterranean groove","after-hours disco","black disco","decadent disco"],"cosmic funk":["space funk","astral funk","galactic groove","interstellar soul funk","Parliament inspired","cosmic groove","outer space R&B","deep space funk","solar funk"],"new weird America":["freak Americana","weird folk","psych Americana","outsider Americana","avant Americana","eccentric folk rock","free Americana","deranged Americana","wild Americana"],"freak folk revival":["new weird folk","contemporary freak folk","modern outsider folk","strange acoustic revival","eccentric contemporary folk","weird song revival","avant folk revival","neo freak folk","renewed weird folk"],"psychedelic country":["cosmic country","acid country","psych Americana","lysergic twang","trippy country","altered state country","expanded country","electric country psych","pastoral psych"],"acid folk":["psychedelic folk","lysergic acoustic","trippy folk","expanded consciousness folk","British acid folk","modal folk psych","mind folk","drone acid folk","mystical folk"],"occult folk":["esoteric folk","ritual folk","pagan folk","earth magic folk","witchcraft song","ancient folk magic","hidden knowledge folk","forest ritual folk","alchemy folk"]};
+const MOODS = ["melancholic and cinematic","nostalgic and warm","eerie and unsettling","euphoric and transcendent","cold and detached","intimate and confessional","dreamy and hazy","urgent and tense","tender and fragile","dark and brooding","playful and irreverent","desolate and sparse","lush and romantic","hypnotic and trance-like","bittersweet and wistful","angry and cathartic","serene and meditative","mysterious and shadowy","yearning and aching","bright and hopeful","surreal and disorienting","raw and vulnerable","polished and sophisticated","primitive and ritualistic","celestial and vast","claustrophobic and dense","liberating and expansive","slow-burning and sensual","jittery and anxious","deeply melancholic","triumphant and soaring","quiet desperation","fever dream logic","autumn afternoon light","3am loneliness","sun-drenched and hazy","rain-soaked and grey","smoke and mirrors","underwater and muffled","burning and intense","glacial and patient","feverish and restless","ancient and timeless","futuristic and cold","warm analog nostalgia","coastal and salt-air","landlocked and vast","urban and nocturnal","suburban and hollow","rural and elemental","post-breakup clarity","pre-dawn stillness","mid-afternoon drift","golden hour warmth","blue hour longing","dissociative and detached","hyper-present and vivid","slow dissolve","sudden clarity","long exhale","obsessive and circling","letting go","holding on","barely holding together","quietly falling apart","strange and beautiful","ugly and honest","precise and cold","warm and imprecise","achingly human","machine-like efficiency","organic and breathing","crystalline and fragile","muddy and earthen","clean and surgical","decadent and excessive","ascetic and bare","maximalist emotion","minimalist restraint","controlled chaos","tender resignation","furious grace","slow ecstasy","quiet devastation","gentle menace","like fog at dawn","like static between stations","like driving alone at night","like an empty house","like the last song","cinematic and vast","dusty and worn","pristine and cold","overgrown and lush","stripped and bare","dense and claustrophobic","wide and open","flickering and unstable","fixed and still","spinning and lost"];
+const INSTRUMENTS = ["reverb-soaked guitar","upright bass","brushed drums","rhodes piano","acoustic guitar fingerpicking","lap steel guitar","12-string jangle","distorted power chords","tremolo guitar","slide guitar","prepared piano","string quartet","cello drone","violin harmonics","harpsichord","mellotron","farfisa organ","hammond organ","pump organ","grand piano","synthesizer arpeggios","analog synth bass","pad layers","vocoder texture","drum machine beat","808 sub bass","lo-fi drum loop","vinyl crackle","tape hiss","field recordings","upright bass walk","jazz guitar chord melody","vibraphone","marimba","kalimba","nylon string guitar","sitar texture","koto sample","shamisen-influenced","gamelan-inspired","brass stabs","muted trumpet","flugelhorn","trombone slide","euphonium drone","flute breath","alto saxophone","tenor sax improvisation","clarinet melody","oboe counterpoint","banjo picking","mandolin tremolo","dulcimer drone","autoharp","resonator guitar","distorted bass","fuzz guitar","clean telecaster","jazzmaster shimmer","strat through chorus","heavy reverb room","spring reverb","plate reverb","tape delay","ping-pong delay","glockenspiel","music box","toy piano","thumb piano","singing bowl","congas","bongos","cajón","hand percussion","talking drum","808 hi-hats","trap snare roll","breakbeat loop","jungle rhythm","garage beat","slow crush beat","half-time feel","waltz rhythm","bolero pattern","samba groove","sub bass pulse","sine wave bass","fretless bass","piccolo bass","bass clarinet","glass harmonica","waterphone","ebow guitar","prepared guitar","extended technique strings","choir texture","choral pad","unison strings","divisi strings","pizzicato strings"];
+const PRODUCTION = ["lo-fi cassette warmth","high fidelity studio polish","raw live recording","spatial stereo depth","analog saturation","vintage tape compression","bedroom recording intimacy","arena reverb","dry and close-miked","wet and cavernous","warm tube saturation","cold digital precision","layered overdubs","minimal single take","dense production","sparse arrangement","1960s mono feel","1970s analog warmth","1980s gated reverb","1990s lo-fi aesthetic","2000s digital sheen"];
+const SCENES = ["rain-soaked city at 3am","empty apartment at dawn","driving alone at night","late night diner under neon lights","foggy coastline at sunrise","after a quiet breakup","hotel room with dim lights","crowded train but feeling alone","warm afternoon in a small kitchen","rooftop overlooking the city at dusk","abandoned shopping mall at midnight","last train home on a Friday","smoke-filled bar after closing time","sitting in a parked car in the rain","watching the city from a hospital window","slow dance in an empty room","summer night with all the windows open","unpacking boxes in a new city alone","walking home after the party ends","staring at the ceiling at 4am"];
+const TEMPO = [70,75,80,85,88,90,92,95,98,100,104,108,110,112,115,118,120,124,128,132,138,145,150,160,170];
 
-const GENRES=["dream pop","shoegaze","jazz noir","trip-hop","darkwave","lo-fi folk","hyperpop","gothic Americana","synth-pop","post-punk revival","chamber pop","ambient folk","neo-soul","bedroom pop","krautrock","slowcore","art rock","noise pop","bossa nova influenced","cold wave","psychedelic soul","indie chanson","afro-shoegaze","space country","post-rock","experimental folk","baroque pop","electronic folk","contemporary folk","ambient country","indie R&B","UK garage-influenced indie","art folk","noir cabaret","Appalachian folk","4AD-inspired","witch house","chillwave","vaporwave","ethereal wave","freak folk","anti-folk","sadcore","twee pop","math rock","midwest emo","skate punk","melodic hardcore","riot grrrl","post-hardcore","singer-songwriter jazz","contemporary classical crossover","minimal techno pop","industrial pop","EBM influenced","tribal ambient","sacred minimalism","drone folk","musique concrète pop","microtonal indie","cumbia influenced","tango noir","fado inspired","chanson nouvelle vague","Nordic folk","Afropop indie","highlife influenced","Cape Verde morna","Turkish psychedelia influenced","Balkan indie","city pop revival","shibuya-kei inspired","enka influenced","kayokyoku revival","J-folk","Tropicália influenced","MPB influenced","nueva canción","tango electrónico","mambo indie","coastal ambient","desert blues","mountain folk","urban folk","harbor noir","retrofuturist pop","cassette punk","lo-fi soul","analog warmth pop","tape hiss folk","maximalist baroque pop","deconstructed club","ambient techno","dark disco","cosmic funk","new weird America","freak folk revival","psychedelic country","acid folk","occult folk"];
-
-const SUBGENRES={
-  "dream pop":["lush dream pop","slowgaze","ethereal pop","cloud pop","oceanic pop","shimmer pop","soft focus pop","hazy dream pop","velvet dream pop"],
-  "shoegaze":["blackgaze","nu-gaze","space rock","noise pop","fuzz pop","heavenly voices shoegaze","post-shoegaze","guitar cloud","drone shoegaze"],
-  "jazz noir":["torch jazz","dark jazz","cinematic jazz","film noir jazz","cool jazz noir","brooding bebop","late night jazz","smoky jazz","subterranean jazz"],
-  "trip-hop":["downbeat","abstract hip-hop","dark trip-hop","cinematic trip-hop","lo-fi trip-hop","Bristol sound","illbient","beat poetry","dub trip-hop"],
-  "darkwave":["ethereal darkwave","neoclassical darkwave","cold wave darkwave","goth darkwave","minimal darkwave","synth darkwave","post-punk darkwave","bat cave","romantic darkwave"],
-  "lo-fi folk":["cassette folk","bedroom folk","outsider folk","home recording folk","lo-fi acoustic","tape folk","DIY folk","rough folk","imperfect folk"],
-  "hyperpop":["bubblegum bass","digicore","glitchpop","PC music","maximalist pop","kawaii metal pop","turbo pop","sugar rave","speed pop"],
-  "gothic Americana":["death country","dark country","murder ballad folk","gothic folk","Southern gothic","Appalachian gothic","dust bowl gothic","cemetery country","haunted Americana"],
-  "synth-pop":["electropop","coldwave synth","minimal synth","new wave pop","retro synth","futurist pop","analog pop","dark synth-pop","dance synth"],
-  "post-punk revival":["angular indie","dance punk","art punk","no wave revival","neo post-punk","tense indie rock","dry punk","wire-influenced","minimal post-punk"],
-  "chamber pop":["orchestral indie","baroque indie","string pop","cinematic chamber","classical crossover pop","intimate orchestral","neo-baroque","salon pop","parlour pop"],
-  "ambient folk":["drone folk","pastoral ambient","meditative folk","nature sound folk","slow folk ambient","quiet folk","still folk","field folk","breath folk"],
-  "neo-soul":["future soul","organic soul","conscious soul","smooth neo-soul","jazz-influenced R&B","lush soul","warm soul","electric soul","spiritual soul"],
-  "bedroom pop":["lo-fi indie","home studio pop","cassette pop","DIY indie pop","soft bedroom rock","intimate pop","4-track pop","duvet pop","home recording indie"],
-  "krautrock":["motorik rock","cosmic rock","kosmische Musik","psych kraut","minimal motorik","progressive kraut","trance rock","drone rock","repetition rock"],
-  "slowcore":["sadcore","minimal rock","quiet rock","sparse indie","glacial indie","spare slowcore","hushed rock","still rock","barely there rock"],
-  "art rock":["avant-pop","experimental rock","progressive pop","complex rock","cerebral rock","concept rock","avant-rock","art pop","difficult pop"],
-  "noise pop":["fuzz pop","distortion pop","lo-fi noise","abrasive pop","wall of sound pop","blown-out pop","feedback pop","scuzz pop","harsh pop"],
-  "bossa nova influenced":["neo bossa","contemporary bossa","jazz bossa","soft samba","Brazilian jazz pop","gentle bossa","cool bossa","intimate bossa","late afternoon bossa"],
-  "cold wave":["minimal cold wave","French cold wave","dark minimal","icy post-punk","severe minimal","stark wave","frozen wave","grey wave","concrete wave"],
-  "psychedelic soul":["cosmic soul","acid soul","trippy R&B","psych funk","mind expanding soul","spiritual soul","transcendent soul","lysergic soul","expanded soul"],
-  "indie chanson":["nouvelle chanson","contemporary chanson","indie French pop","poetic pop","literary pop","café pop","romantic indie","rive gauche pop","post-chanson"],
-  "afro-shoegaze":["Afro noise pop","Lagos shoegaze","African fuzz","West African indie","Afrobeat shoegaze","continental noise","pan-African indie","tropical noise","Lagos fuzz"],
-  "space country":["cosmic country","astral Americana","psychedelic country","outer space folk","astro twang","galaxy country","deep space Western","interstellar twang","psych twang"],
-  "post-rock":["cinematic post-rock","epic post-rock","instrumental rock","crescendo rock","atmospheric rock","drone rock","ambient rock","math post-rock","orchestral post-rock"],
-  "experimental folk":["avant-folk","abstract folk","deconstructed folk","sound poetry folk","noise folk","extended folk","free folk","difficult folk","anti-folk experimental"],
-  "baroque pop":["neo-baroque","orchestral pop","harpsichord pop","classical pop","formal pop","courtly pop","gilded pop","chamber pop baroque","lavish pop"],
-  "electronic folk":["folktronica","digital folk","electro-acoustic folk","synth folk","hybrid folk","folk electronics","acoustic electronic","laptop folk","circuit folk"],
-  "contemporary folk":["new folk","singer-songwriter folk","indie folk","modern acoustic","narrative folk","confessional folk","literary folk","kitchen table folk","honest folk"],
-  "ambient country":["pedal steel ambient","country drone","desolate Americana","vast country","desert ambient country","empty plains sound","still country","horizon country","open road ambient"],
-  "indie R&B":["alternative R&B","art R&B","experimental soul","future R&B","minimal R&B","bedroom R&B","intimate soul","left-field R&B","soft R&B"],
-  "UK garage-influenced indie":["post-garage indie","South London sound","grime-touched indie","urban indie","estate indie","London bass indie","garage pop","2-step indie","urban indie pop"],
-  "art folk":["conceptual folk","theatrical folk","performance folk","literary folk art","song-as-art","composed folk","formal folk","gallery folk","installation folk"],
-  "noir cabaret":["dark cabaret","Weimar-influenced","Berlin cabaret","theatrical noir","chanson noir","torch noir","decadent cabaret","expressionist song","smoky cabaret"],
-  "Appalachian folk":["mountain music","old-time folk","shape note folk","hollerin folk","dulcimer folk","Scots-Irish folk","sacred harp inspired","hollow folk","ridge music"],
-  "4AD-inspired":["ethereal 4AD","dream 4AD","pale saints inspired","cocteau twins influenced","This Mortal Coil sound","lush shimmer","celestial 4AD","heavenly voices","gossamer pop"],
-  "witch house":["drag","haunted house music","occult electronic","dark ritual house","slowed trap goth","black house","seance music","hex music","spell pop"],
-  "chillwave":["glo-fi","memory wave","nostalgia wave","soft synth pop","hazy summer electronic","warm lo-fi synth","pastel wave","sun-faded pop","haze pop"],
-  "vaporwave":["mallsoft","future funk","late capitalism aesthetic","slowed and reverbed","aesthetic vaporwave","Macintosh Plus sound","plunderphonics pop","elevator pop","ghost mall"],
-  "ethereal wave":["heavenly voices","celestial goth","angelic darkwave","shimmer goth","sacred darkwave","luminous wave","transcendent goth","cloud goth","seraphic wave"],
-  "freak folk":["psych folk","weird folk","strange folk","outsider folk psych","animal collective influenced","free weird folk","eccentric folk","forest folk","troll folk"],
-  "anti-folk":["East Village folk","cynical folk","punk folk","ironic folk","spoken word folk","confrontational acoustic","raw folk","protest lite","sarcastic folk"],
-  "sadcore":["grief pop","tearjerker indie","devastating folk","heartbreak music","slow sad indie","quietly destroyed","sorrow pop","loss music","dirge pop"],
-  "twee pop":["C86 sound","jangly twee","cutesy indie","indiepop twee","cardigan pop","shy pop","gentle indie","daisy pop","sweet indie"],
-  "math rock":["emo math","technical indie","odd meter rock","angular math","polyrhythmic indie","Midwest math","guitar nerd rock","precision rock","time sig rock"],
-  "midwest emo":["skramz","twinkle emo","Midwest screamo","Kalamazoo sound","midwestern sadness","DIY emo","cap n jazz influenced","emo revival","heartland emo"],
-  "skate punk":["melodic skate punk","Epitaph punk","fast melodic punk","Californian skate","pop punk skate","Fat Wreck sound","SoCal punk","beach punk","surf punk"],
-  "melodic hardcore":["melodic HC","fast melodic punk","emotional hardcore","post-hardcore melodic","harmony hardcore","tuneful HC","bridge nine sound","anthem HC","sing-along HC"],
-  "riot grrrl":["feminist punk","Olympia sound","girl punk","DIY feminist rock","zine punk","empowerment rock","angry girl music","bedroom riot","third wave punk"],
-  "post-hardcore":["screamo","emotional hardcore","complex HC","art hardcore","experimental post-HC","angular hardcore","sung and screamed","cry core","math HC"],
-  "singer-songwriter jazz":["piano trio songwriter","intimate jazz song","confessional jazz","lyrical jazz","poetic jazz song","jazz balladry","warm jazz writing","narrative jazz","personal jazz"],
-  "contemporary classical crossover":["neoclassical pop","post-classical song","composed pop","art pop classical","orchestral singer-songwriter","chamber singer-songwriter","formal pop","serious pop","classical adjacent"],
-  "minimal techno pop":["stripped techno pop","clean electronic pop","minimalist club pop","lean synth pop","stark dance pop","cold minimal pop","zero ornament pop","clinical pop","functional pop"],
-  "industrial pop":["EBM pop","harsh electronic pop","industrial dance","metal machine pop","hard electronic song","abrasive synth pop","power noise pop","machine pop","factory pop"],
-  "EBM influenced":["body music","electronic body","hard EBM","minimal body music","German electronic influenced","clinical dance","functional electronic","body music pop","march electronic"],
-  "tribal ambient":["ritual ambient","shamanic drone","ceremonial sound","indigenous-influenced ambient","earth ritual music","trance ceremony","primal ambient","bone music","drum circle ambient"],
-  "sacred minimalism":["holy minimalism","spiritual minimalism","tintinnabuli","arvo pärt influenced","silence-based","sacred drone","devotional minimalism","monastery pop","prayer ambient"],
-  "drone folk":["drone acoustic","sustained folk","long tone folk","meditative acoustic","drone country","bowed folk","endless folk","bow folk","sustained acoustic"],
-  "musique concrète pop":["found sound pop","object music pop","tape manipulation song","concrete song","phonographic pop","noise source pop","assembled sound pop","kitchen pop","world as instrument"],
-  "microtonal indie":["quarter tone pop","alternate tuning indie","xenharmonic folk","just intonation song","out of tune indie","detuned pop","alternate scale folk","strange tuning","wolf tone pop"],
-  "cumbia influenced":["tropical cumbia","urban cumbia","cumbia pop","digital cumbia","dark cumbia","cumbia indie","South American rhythm pop","nortec cumbia","psychedelic cumbia"],
-  "tango noir":["dark tango","nuevo tango","tango electrónico","cinematic tango","melancholic tango","Buenos Aires noir","tango art song","existential tango","late tango"],
-  "fado inspired":["contemporary fado","fado pop","Lisbon soul","saudade pop","morna-fado fusion","maritime sorrow","Portuguese melancholy","fado moderno","neo-fado"],
-  "chanson nouvelle vague":["nouvelle chanson","French new wave song","poetic French pop","cinematic chanson","intellectual pop song","Rive Gauche sound","Parisian indie","literary French pop","existentialist pop"],
-  "Nordic folk":["Scandinavian folk","Nordic melancholy","Finnish folk","Swedish folk pop","Norwegian mountain music","Arctic folk","Norse song","fjord folk","tundra folk"],
-  "Afropop indie":["Afrobeats indie","West African indie pop","pan-African pop","continental indie","Lagos pop","Accra indie","Nairobi sound","Afro indie","pan-African indie"],
-  "highlife influenced":["Ghanaian highlife pop","electric highlife","urban highlife","guitar highlife","Afro-jazz pop","jùjú influenced","palm wine pop","Lagos highlife","modern highlife"],
-  "Cape Verde morna":["morna pop","saudade Atlantic","island melancholy","Cesária Évora influenced","Cape Verdean soul","Atlantic folk","ocean sorrow","island folk","Atlantic melancholy"],
-  "Turkish psychedelia influenced":["Anatolian rock","Turkish psych","Eastern psychedelia","Bosphorus psych","Arabesque psych","Ottoman psych","Istanbul psych","Anadolu pop","Eastern electric"],
-  "Balkan indie":["Balkan folk pop","Eastern European indie","klezmer-influenced indie","Romani-influenced pop","Balkan beat pop","ex-Yugoslav indie","crossroads sound","Ottoman indie","Byzantine pop"],
-  "city pop revival":["Japanese city pop","80s city pop","sophisticated pop","urban contemporary Japan","yacht city pop","Shibuya sound revival","melodic city pop","Tokyo night pop","Nippon city pop"],
-  "shibuya-kei inspired":["Shibuya-kei pop","sophisticated Japanese indie","Pizzicato Five influenced","Cornelius-inspired","eclecticist Japanese pop","reference pop","library music pop","catalogue pop","cinephile pop"],
-  "enka influenced":["modern enka","enka pop","kayokyoku-enka","neo-enka","contemporary Japanese ballad","Nikkei pop","emotional Japanese pop","kouta influenced","sentimental J-pop"],
-  "kayokyoku revival":["70s Japanese pop revival","melodic Japanese pop","nostalgic J-pop","showa song revival","kayo pop","gentle J-pop","warm Japanese melody","analog J-pop","vintage J-pop"],
-  "J-folk":["Japanese folk pop","acoustic J-folk","Japanese singer-songwriter","yuming-influenced","soft Japanese acoustic","J-folk ballad","gentle Japanese folk","nihon folk","Japanese acoustic singer"],
-  "Tropicália influenced":["tropicalist pop","Brazilian modernist","carnivalesque rock","bossa tropicália","psychedelic samba","MPB avant-garde","Rio psych","concrete tropicalism","Brazilian psych"],
-  "MPB influenced":["música popular brasileira","Brazilian popular song","sophisticated Brazilian","samba canção modern","bossa MPB","urban Brazilian","contemporary samba song","carioca pop","São Paulo song"],
-  "nueva canción":["Latin protest folk","South American folk song","nueva trova","poetic Latin folk","Chilean nueva canción","Andean folk song","political Latin folk","liberation folk","guitar protest"],
-  "tango electrónico":["electronic tango","Gotan Project influenced","modern tango","digital tango","urban tango","tango fusion","Buenos Aires electronic","techno tango","nuevo electronic tango"],
-  "mambo indie":["Latin indie","tropical indie","mambo pop","salsa-influenced indie","pan-Latino indie","Nuyorican sound","Latin alternative","tropical alternative","barrio pop"],
-  "coastal ambient":["ocean ambient","shore drone","maritime atmosphere","wave sound","tidal ambient","beach ambient","harbour sound","sea foam ambient","salt air drone"],
-  "desert blues":["Saharan blues","Tuareg blues","North African blues","nomadic blues","sand guitar","desert rock blues","Timbuktu blues","Mali blues","dune folk"],
-  "mountain folk":["highland folk","peak folk","altitude music","mountain ballad","ridge song","summit folk","elevation acoustic","high altitude folk","glacier folk"],
-  "urban folk":["city folk","pavement folk","subway folk","concrete acoustic","metropolitan folk","street corner song","urban acoustic","sidewalk song","transit folk"],
-  "harbor noir":["port city blues","dockside jazz","maritime noir","shipping lane blues","foghorn music","coastal darkness","wharf melancholy","sailors song","fog noir"],
-  "retrofuturist pop":["retro sci-fi pop","space age pop revival","atomic age aesthetic","Jetsons sound","1960s future pop","silver age synth","optimistic future pop","jet age pop","googie pop"],
-  "cassette punk":["tape punk","lo-fi punk","DIY cassette rock","home recorded punk","4-track punk","boombox punk","rough cassette","boom box rock","hiss punk"],
-  "lo-fi soul":["bedroom soul","lo-fi R&B","rough soul","cassette soul","imperfect soul","human soul","warm lo-fi soul","tape soul","analog soul"],
-  "analog warmth pop":["tape warmth song","warm production pop","vintage analog pop","tube warmth music","organic pop","natural sound pop","imperfect warmth","reel to reel pop","analog comfort"],
-  "tape hiss folk":["static folk","hiss acoustic","imperfect recording folk","weathered folk","degraded beauty folk","worn tape song","crackling folk","eroded folk","failing tape folk"],
-  "maximalist baroque pop":["orchestral maximalism","lavish pop","dense arrangement pop","epic baroque","over-the-top orchestral","grandiose chamber","excessive beauty","maximalist chamber","lush overload"],
-  "deconstructed club":["post-club","abstract dance","conceptual club music","broken club","shattered dance","art club","anti-dance dance","ruins club","club debris"],
-  "ambient techno":["Berlin ambient","minimal ambient techno","drone techno","isolationist techno","deep ambient electronic","techno meditation","sustained techno","long form techno","trance ambient"],
-  "dark disco":["Italo dark","moody disco","noir disco","shadow disco","underground disco","subterranean groove","after-hours disco","black disco","decadent disco"],
-  "cosmic funk":["space funk","astral funk","galactic groove","interstellar soul funk","Parliament inspired","cosmic groove","outer space R&B","deep space funk","solar funk"],
-  "new weird America":["freak Americana","weird folk","psych Americana","outsider Americana","avant Americana","eccentric folk rock","free Americana","deranged Americana","wild Americana"],
-  "freak folk revival":["new weird folk","contemporary freak folk","modern outsider folk","strange acoustic revival","eccentric contemporary folk","weird song revival","avant folk revival","neo freak folk","renewed weird folk"],
-  "psychedelic country":["cosmic country","acid country","psych Americana","lysergic twang","trippy country","altered state country","expanded country","electric country psych","pastoral psych"],
-  "acid folk":["psychedelic folk","lysergic acoustic","trippy folk","expanded consciousness folk","British acid folk","modal folk psych","mind folk","drone acid folk","mystical folk"],
-  "occult folk":["esoteric folk","ritual folk","pagan folk","earth magic folk","witchcraft song","ancient folk magic","hidden knowledge folk","forest ritual folk","alchemy folk"]
-};
-
-const MOODS=["melancholic and cinematic","nostalgic and warm","eerie and unsettling","euphoric and transcendent","cold and detached","intimate and confessional","dreamy and hazy","urgent and tense","tender and fragile","dark and brooding","playful and irreverent","desolate and sparse","lush and romantic","hypnotic and trance-like","bittersweet and wistful","angry and cathartic","serene and meditative","mysterious and shadowy","yearning and aching","bright and hopeful","surreal and disorienting","raw and vulnerable","polished and sophisticated","primitive and ritualistic","celestial and vast","claustrophobic and dense","liberating and expansive","slow-burning and sensual","jittery and anxious","deeply melancholic","triumphant and soaring","quiet desperation","fever dream logic","autumn afternoon light","3am loneliness","sun-drenched and hazy","rain-soaked and grey","smoke and mirrors","underwater and muffled","burning and intense","glacial and patient","feverish and restless","ancient and timeless","futuristic and cold","warm analog nostalgia","coastal and salt-air","landlocked and vast","urban and nocturnal","suburban and hollow","rural and elemental","post-breakup clarity","pre-dawn stillness","mid-afternoon drift","golden hour warmth","blue hour longing","dissociative and detached","hyper-present and vivid","slow dissolve","sudden clarity","long exhale","obsessive and circling","letting go","holding on","barely holding together","quietly falling apart","strange and beautiful","ugly and honest","precise and cold","warm and imprecise","achingly human","machine-like efficiency","organic and breathing","crystalline and fragile","muddy and earthen","clean and surgical","decadent and excessive","ascetic and bare","maximalist emotion","minimalist restraint","controlled chaos","tender resignation","furious grace","slow ecstasy","quiet devastation","gentle menace","like fog at dawn","like static between stations","like driving alone at night","like an empty house","like the last song","cinematic and vast","dusty and worn","pristine and cold","overgrown and lush","stripped and bare","dense and claustrophobic","wide and open","flickering and unstable","fixed and still","spinning and lost"];
-
-const INSTRUMENTS=["reverb-soaked guitar","upright bass","brushed drums","rhodes piano","acoustic guitar fingerpicking","lap steel guitar","12-string jangle","distorted power chords","tremolo guitar","slide guitar","prepared piano","string quartet","cello drone","violin harmonics","harpsichord","mellotron","farfisa organ","hammond organ","pump organ","grand piano","synthesizer arpeggios","analog synth bass","pad layers","vocoder texture","drum machine beat","808 sub bass","lo-fi drum loop","vinyl crackle","tape hiss","field recordings","upright bass walk","jazz guitar chord melody","vibraphone","marimba","kalimba","nylon string guitar","sitar texture","koto sample","shamisen-influenced","gamelan-inspired","brass stabs","muted trumpet","flugelhorn","trombone slide","euphonium drone","flute breath","alto saxophone","tenor sax improvisation","clarinet melody","oboe counterpoint","banjo picking","mandolin tremolo","dulcimer drone","autoharp","resonator guitar","distorted bass","fuzz guitar","clean telecaster","jazzmaster shimmer","strat through chorus","heavy reverb room","spring reverb","plate reverb","tape delay","ping-pong delay","glockenspiel","music box","toy piano","thumb piano","singing bowl","congas","bongos","cajón","hand percussion","talking drum","808 hi-hats","trap snare roll","breakbeat loop","jungle rhythm","garage beat","slow crush beat","half-time feel","waltz rhythm","bolero pattern","samba groove","sub bass pulse","sine wave bass","fretless bass","piccolo bass","bass clarinet","glass harmonica","waterphone","ebow guitar","prepared guitar","extended technique strings","choir texture","choral pad","unison strings","divisi strings","pizzicato strings"];
-
-const SCENES=[
-  "rain-soaked city at 3am","empty apartment at dawn","driving alone at night",
-  "late night diner under neon lights","foggy coastline at sunrise",
-  "after a quiet breakup","hotel room with dim lights",
-  "crowded train but feeling alone","warm afternoon in a small kitchen",
-  "rooftop overlooking the city at dusk","abandoned shopping mall at midnight",
-  "last train home on a Friday","smoke-filled bar after closing time",
-  "sitting in a parked car in the rain","watching the city from a hospital window",
-  "slow dance in an empty room","summer night with all the windows open",
-  "unpacking boxes in a new city alone","walking home after the party ends",
-  "staring at the ceiling at 4am"
+const ERA = [
+"1920s jazz age","1930s swing era","1940s wartime ballad","1950s rock and roll dawn",
+"early 1960s girl group","mid 1960s British invasion","late 1960s psychedelic",
+"early 1970s singer-songwriter","mid 1970s funk and disco","late 1970s post-punk",
+"early 1980s new wave","mid 1980s synth pop peak","late 1980s indie underground",
+"early 1990s grunge and shoegaze","mid 1990s Britpop and trip-hop","late 1990s Y2K pop",
+"early 2000s indie rock revival","mid 2000s blog house era","late 2000s chillwave",
+"early 2010s bedroom pop","mid 2010s lo-fi revival","late 2010s hyperpop",
+"early 2020s pandemic bedroom","2020s neo-soul revival","2020s post-pandemic folk"
 ];
 
-const PRODUCTION=["lo-fi cassette warmth","high fidelity studio polish","raw live recording","spatial stereo depth","analog saturation","vintage tape compression","bedroom recording intimacy","arena reverb","dry and close-miked","wet and cavernous","warm tube saturation","cold digital precision","layered overdubs","minimal single take","dense production","sparse arrangement","1960s mono feel","1970s analog warmth","1980s gated reverb","1990s lo-fi aesthetic","2000s digital sheen"];
-
-const TEMPO=[70,75,80,85,88,90,92,95,98,100,104,108,110,112,115,118,120,124,128,132,138,145,150,160,170];
-
-const COLORS=["#c084fc","#67e8f9","#86efac","#fda4af","#fcd34d","#a5f3fc","#d9f99d","#fed7aa","#f9a8d4"];
-
-let generated=0,currentPrompt="";
-
-const pick=arr=>arr[Math.floor(Math.random()*arr.length)];
-const pickN=(arr,n)=>[...arr].sort(()=>0.5-Math.random()).slice(0,Math.min(n,arr.length));
-
-function generate(){
-  generated++;
-  document.getElementById("counter").textContent=`${generated} generated`;
-
-  const vocal=pick(VOCALS);
-  const genre=pick(GENRES);
-  const subgenreList=SUBGENRES[genre];
-  const subgenre=subgenreList?pick(subgenreList):null;
-  const mood=pick(MOODS);
-  const insts=pickN(INSTRUMENTS,Math.random()<0.5?2:3);
-  const prod=Math.random()<0.4?pick(PRODUCTION):null;
-  const tempo=Math.random()<0.3?pick(TEMPO)+" BPM":null;
-  const scene=Math.random()<0.35?pick(SCENES):null;
-
-  const parts=["female vocals",vocal,genre];
-  if(subgenre)parts.push(subgenre);
-  parts.push(insts.join(", "),mood);
-  if(prod)parts.push(prod);
-  if(tempo)parts.push(tempo);
-  if(scene)parts.push(scene);
-  currentPrompt=parts.join(", ");
-
-  const fields=[
-    {label:"ボーカル",value:vocal,color:COLORS[0]},
-    {label:"ジャンル",value:genre,color:COLORS[1]},
-  ];
-  if(subgenre)fields.push({label:"サブジャンル",value:subgenre,color:COLORS[8]});
-  fields.push(
-    {label:"楽器",value:insts.join(", "),color:COLORS[2]},
-    {label:"ムード",value:mood,color:COLORS[3]}
-  );
-  if(prod)fields.push({label:"プロダクション",value:prod,color:COLORS[4]});
-  if(tempo)fields.push({label:"テンポ",value:tempo,color:COLORS[5]});
-  if(scene)fields.push({label:"シーン",value:scene,color:COLORS[6]});
-
-  const fieldsHTML=fields.map(f=>`
-    <div class="field">
-      <div class="field-label">${f.label}</div>
-      <div class="field-value" style="color:${f.color}">${f.value}</div>
-    </div>
-  `).join("");
-
-  document.getElementById("result").innerHTML=`
-    <div class="fields animate-in">${fieldsHTML}</div>
-    <hr class="divider">
-    <div class="prompt-label">Sunoにコピー</div>
-    <div class="prompt-text">${currentPrompt}</div>
-    <button class="copy-btn" id="copyBtn" onclick="copyPrompt()">Copy</button>
-  `;
-
-  document.getElementById("emptyState").style.display="none";
-  document.getElementById("result").style.display="block";
-  document.getElementById("saveBtn").style.display="block";
+const TEXTURE = [
+"warm and analog, tape saturated","cold and digital, clinical precision",
+"grainy and overdriven, lo-fi warmth","crystalline and pristine, high resolution",
+"muddy and earthy, raw organic","smooth and polished, studio sheen",
+"brittle and fragile, glass-like clarity","dense and layered, rich harmonic depth",
+"sparse and skeletal, wide empty space","fuzzy and distorted, blown-out warmth",
+"silky and flowing, seamless transitions","rough and textured, tactile grain",
+"airy and weightless, gossamer thin","heavy and compressed, wall of sound",
+"vintage and worn, nostalgic patina","futuristic and clean, synthetic precision",
+"wet and reverb-drenched, cavernous space","dry and intimate, close and personal",
+"shimmering and luminous, iridescent","dark and absorbing, velvety shadow",
+"crackling and imperfect, cassette hiss","immaculate and transparent, audiophile",
+"lush and orchestral, rich arrangement","minimal and restrained, deliberate silence",
+"buzzing and alive, electric energy","muted and hushed, sotto voce"
+];
+const FIELD_COLORS = {
+vocal:        "#c084fc",
+vocalNuance:  "#a78bfa",
+genre:        "#67e8f9",
+subgenre:     "#a5f3fc",
+inst1:        "#86efac",
+inst2:        "#86efac",
+inst3:        "#86efac",
+inst4:        "#86efac",
+mood:         "#fda4af",
+production:   "#fcd34d",
+tempo:        "#fed7aa",
+scene:        "#f9a8d4",
+era:          "#fde68a",
+texture:      "#d9f99d"
+};
+const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+let lockedFields  = {};
+let clearedFields = {};
+let lastVals      = {};
+let currentPrompt = "";
+let generated     = 0;
+const isLocked  = key => !!lockedFields[key];
+const isCleared = key => !!clearedFields[key];
+function toggleLock(key) { lockedFields[key] = !lockedFields[key]; renderFields(); }
+function toggleClear(key) { if (isLocked(key)) return; clearedFields[key] = !clearedFields[key]; buildPrompt(); renderFields(); }
+function reroll(key) {
+if (isLocked(key)) return;
+clearedFields[key] = false;
+if (key === 'vocal')       { lastVals.vocal = pick(VOCALS); }
+else if (key === 'vocalNuance') { lastVals.vocalNuance = pick(VOCAL_NUANCES); }
+else if (key === 'genre') { lastVals.genre = pick(GENRES); if (!isLocked('subgenre')) { const sub = SUBGENRES[lastVals.genre]; lastVals.subgenre = sub ? pick(sub) : null; } }
+else if (key === 'subgenre') { const sub = SUBGENRES[lastVals.genre]; lastVals.subgenre = sub ? pick(sub) : null; }
+else if (key === 'inst1') { lastVals.inst1 = pick(INSTRUMENTS); }
+else if (key === 'inst2') { lastVals.inst2 = pick(INSTRUMENTS); }
+else if (key === 'inst3') { lastVals.inst3 = pick(INSTRUMENTS); }
+else if (key === 'inst4') { lastVals.inst4 = pick(INSTRUMENTS); }
+else if (key === 'mood') { lastVals.mood = pick(MOODS); }
+else if (key === 'production') { lastVals.production = pick(PRODUCTION); }
+else if (key === 'tempo') { lastVals.tempo = pick(TEMPO) + " BPM"; }
+else if (key === 'scene')   { lastVals.scene   = pick(SCENES); }
+else if (key === 'era')     { lastVals.era     = pick(ERA); }
+else if (key === 'texture') { lastVals.texture = pick(TEXTURE); }
+buildPrompt(); renderFields();
 }
-
-function copyPrompt(){
-  if(!currentPrompt)return;
-  navigator.clipboard.writeText(currentPrompt).then(()=>{
-    const btn=document.getElementById("copyBtn");
-    btn.textContent="Copied ✓";btn.classList.add("copied");
-    setTimeout(()=>{btn.textContent="Copy";btn.classList.remove("copied")},2000);
-  });
+function buildPrompt() {
+const v = lastVals;
+const parts = ["female vocals"];
+const add = (key, val) => { if (val && !isCleared(key)) parts.push(val); };
+add('vocal', v.vocal); add('vocalNuance', v.vocalNuance); add('era', v.era); add('texture', v.texture); add('genre', v.genre); add('subgenre', v.subgenre);
+add('inst1', v.inst1); add('inst2', v.inst2); add('inst3', v.inst3); add('inst4', v.inst4);
+add('mood', v.mood); add('production', v.production); add('tempo', v.tempo); add('scene', v.scene);
+currentPrompt = parts.join(", ");
+const el = document.getElementById("promptText");
+if (el) el.textContent = currentPrompt;
 }
-
-function savePrompt(){
-  if(!currentPrompt)return;
-  let saved=JSON.parse(localStorage.getItem("sound_arch_v4")||"[]");
-  if(saved.includes(currentPrompt))return;
-  saved.unshift(currentPrompt);
-  localStorage.setItem("sound_arch_v4",JSON.stringify(saved.slice(0,30)));
-  renderSaved();
+function renderFields() {
+const v = lastVals;
+const container = document.getElementById("displayFields");
+const fields = [
+{ label: "Vocal",        key: "vocal",        value: v.vocal },
+{ label: "Vocal Nuance", key: "vocalNuance",  value: v.vocalNuance },
+{ label: "Genre",        key: "genre",        value: v.genre },
+{ label: "Subgenre",     key: "subgenre",     value: v.subgenre },
+{ label: "Instrument",   key: "inst1",        value: v.inst1 },
+{ label: "Instrument",   key: "inst2",        value: v.inst2 },
+{ label: "Instrument",   key: "inst3",        value: v.inst3 },
+{ label: "Instrument",   key: "inst4",        value: v.inst4 },
+{ label: "Mood",         key: "mood",         value: v.mood },
+{ label: "Production",   key: "production",   value: v.production },
+{ label: "Tempo",        key: "tempo",        value: v.tempo },
+{ label: "Scene",        key: "scene",        value: v.scene },
+{ label: "Era",          key: "era",          value: v.era },
+{ label: "Texture",      key: "texture",      value: v.texture },
+].filter(f => f.value !== undefined && f.value !== null);
+container.innerHTML = fields.map(f => {
+const locked = isLocked(f.key); const cleared = isCleared(f.key);
+const color = FIELD_COLORS[f.key] || "#c8c0d8";
+return `<div class="field-row ${locked ? 'is-locked' : ''} ${cleared ? 'is-cleared' : ''}"> <div class="field-label">${f.label}</div> <div class="field-value ${cleared ? 'cleared' : ''}" style="color:${cleared ? '#2a2438' : color}">${cleared ? '— excluded from prompt —' : f.value}</div> <div class="field-actions"> <button class="lock-btn ${locked ? 'locked' : ''}" onclick="toggleLock('${f.key}')">${locked ? '🔒' : '🔓'}</button> <button class="reroll-btn" onclick="reroll('${f.key}')">🔄</button> <button class="clear-btn ${cleared ? 'active' : ''}" onclick="toggleClear('${f.key}')">✖</button> </div> </div>`;
+}).join("");
 }
-
-function renderSaved(){
-  const saved=JSON.parse(localStorage.getItem("sound_arch_v4")||"[]");
-  const section=document.getElementById("savedSection");
-  const list=document.getElementById("savedList");
-  if(saved.length===0){section.style.display="none";return}
-  section.style.display="block";
-  list.innerHTML=saved.map((p,i)=>`<div class="saved-item" data-index="${i}">${p}</div>`).join("");
-  document.querySelectorAll(".saved-item").forEach(el=>{
-    el.onclick=()=>navigator.clipboard.writeText(saved[el.dataset.index]);
-  });
+function generateAll() {
+generated++;
+document.getElementById("counter").textContent = `${generated} generated`;
+document.getElementById("emptyState").style.display = "none";
+document.getElementById("displayFields").style.display = "flex";
+document.getElementById("promptBox").style.display = "block";
+document.getElementById("saveBtn").style.display = "block";
+document.getElementById("batchSection").style.display = "none";
+const genre = isLocked('genre') ? lastVals.genre : pick(GENRES);
+const subList = SUBGENRES[genre];
+lastVals = {
+vocal:        isLocked('vocal')        ? lastVals.vocal        : pick(VOCALS),
+vocalNuance:  isLocked('vocalNuance')  ? lastVals.vocalNuance  : pick(VOCAL_NUANCES),
+genre:        genre,
+subgenre:     isLocked('subgenre')     ? lastVals.subgenre     : (subList ? pick(subList) : null),
+inst1:        isLocked('inst1')        ? lastVals.inst1        : pick(INSTRUMENTS),
+inst2:        isLocked('inst2')        ? lastVals.inst2        : pick(INSTRUMENTS),
+inst3:        isLocked('inst3')        ? lastVals.inst3        : pick(INSTRUMENTS),
+inst4:        isLocked('inst4')        ? lastVals.inst4        : pick(INSTRUMENTS),
+mood:         isLocked('mood')         ? lastVals.mood         : pick(MOODS),
+production:   isLocked('production')   ? lastVals.production   : pick(PRODUCTION),
+tempo:        isLocked('tempo')        ? lastVals.tempo        : pick(TEMPO) + " BPM",
+scene:        isLocked('scene')        ? lastVals.scene        : pick(SCENES),
+era:          isLocked('era')          ? lastVals.era          : pick(ERA),
+texture:      isLocked('texture')      ? lastVals.texture      : pick(TEXTURE),
+};
+buildPrompt(); renderFields();
 }
-
+function evolvePrompt() {
+if (!lastVals || Object.keys(lastVals).length === 0) { generateAll(); return; }
+generated++;
+document.getElementById("counter").textContent = `${generated} generated`;
+document.getElementById("batchSection").style.display = "none";
+const genre = isLocked('genre') ? lastVals.genre : pick(GENRES);
+const subList = SUBGENRES[genre];
+lastVals = {
+vocal:        isLocked('vocal')        ? lastVals.vocal        : (Math.random() < 0.65 ? lastVals.vocal        : pick(VOCALS)),
+vocalNuance:  isLocked('vocalNuance')  ? lastVals.vocalNuance  : (Math.random() < 0.65 ? lastVals.vocalNuance  : pick(VOCAL_NUANCES)),
+genre:        genre,
+subgenre:     isLocked('subgenre')     ? lastVals.subgenre     : (Math.random() < 0.65 && lastVals.subgenre ? lastVals.subgenre : (subList ? pick(subList) : null)),
+inst1:        isLocked('inst1')        ? lastVals.inst1        : (Math.random() < 0.65 ? lastVals.inst1        : pick(INSTRUMENTS)),
+inst2:        isLocked('inst2')        ? lastVals.inst2        : (Math.random() < 0.65 ? lastVals.inst2        : pick(INSTRUMENTS)),
+inst3:        isLocked('inst3')        ? lastVals.inst3        : (Math.random() < 0.65 ? lastVals.inst3        : pick(INSTRUMENTS)),
+inst4:        isLocked('inst4')        ? lastVals.inst4        : (Math.random() < 0.65 ? lastVals.inst4        : pick(INSTRUMENTS)),
+mood:         isLocked('mood')         ? lastVals.mood         : (Math.random() < 0.65 ? lastVals.mood         : pick(MOODS)),
+production:   isLocked('production')   ? lastVals.production   : (Math.random() < 0.65 ? lastVals.production   : pick(PRODUCTION)),
+tempo:        isLocked('tempo')        ? lastVals.tempo        : (Math.random() < 0.65 ? lastVals.tempo        : pick(TEMPO) + " BPM"),
+scene:        isLocked('scene')        ? lastVals.scene        : (Math.random() < 0.65 ? lastVals.scene        : pick(SCENES)),
+era:          isLocked('era')          ? lastVals.era          : (Math.random() < 0.65 ? lastVals.era          : pick(ERA)),
+texture:      isLocked('texture')      ? lastVals.texture      : (Math.random() < 0.65 ? lastVals.texture      : pick(TEXTURE)),
+};
+buildPrompt(); renderFields();
+}
+function generateBatch(count) {
+const batchContainer = document.getElementById("batchSection");
+const batchList = document.getElementById("batchList");
+batchList.innerHTML = "";
+batchContainer.style.display = "block";
+const results = [];
+for (let i = 0; i < count; i++) {
+const genre = isLocked('genre') ? lastVals.genre : pick(GENRES);
+const subList = SUBGENRES[genre];
+const vals = {
+vocal:        isLocked('vocal')        ? lastVals.vocal        : pick(VOCALS),
+vocalNuance:  isLocked('vocalNuance')  ? lastVals.vocalNuance  : pick(VOCAL_NUANCES),
+genre:        genre,
+subgenre:     isLocked('subgenre')     ? lastVals.subgenre     : (subList ? pick(subList) : null),
+inst1:        isLocked('inst1')        ? lastVals.inst1        : pick(INSTRUMENTS),
+inst2:        isLocked('inst2')        ? lastVals.inst2        : pick(INSTRUMENTS),
+inst3:        isLocked('inst3')        ? lastVals.inst3        : pick(INSTRUMENTS),
+inst4:        isLocked('inst4')        ? lastVals.inst4        : pick(INSTRUMENTS),
+mood:         isLocked('mood')         ? lastVals.mood         : pick(MOODS),
+production:   isLocked('production')   ? lastVals.production   : pick(PRODUCTION),
+tempo:        isLocked('tempo')        ? lastVals.tempo        : pick(TEMPO) + " BPM",
+scene:        isLocked('scene')        ? lastVals.scene        : pick(SCENES),
+era:          isLocked('era')          ? lastVals.era          : pick(ERA),
+texture:      isLocked('texture')      ? lastVals.texture      : pick(TEXTURE),
+};
+const parts = ["female vocals"];
+const add = (key, val) => { if (val && !isCleared(key)) parts.push(val); };
+add('vocal', vals.vocal); add('vocalNuance', vals.vocalNuance); add('genre', vals.genre); add('subgenre', vals.subgenre);
+add('inst1', vals.inst1); add('inst2', vals.inst2); add('inst3', vals.inst3); add('inst4', vals.inst4);
+add('mood', vals.mood); add('production', vals.production); add('tempo', vals.tempo); add('scene', vals.scene); add('era', vals.era); add('texture', vals.texture);
+results.push({ prompt: parts.join(", "), vals });
+}
+batchList.innerHTML = results.map((item, index) => ` <div class="batch-item"> <div style="word-break:break-all; line-height:1.5;">${item.prompt}</div> <div class="batch-actions"> <button onclick="copyBatchPrompt(${index})">COPY</button> <button onclick="saveBatchPrompt(${index})">SAVE</button> <button onclick="useAsBase(${index})">USE AS BASE</button> </div> </div>`).join("");
+window.currentBatchResults = results;
+}
+function copyBatchPrompt(index) {
+const prompt = window.currentBatchResults[index].prompt;
+navigator.clipboard.writeText(prompt).catch(() => { const ta = document.createElement("textarea"); ta.value = prompt; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); });
+}
+function saveBatchPrompt(index) {
+const prompt = window.currentBatchResults[index].prompt;
+let saved = JSON.parse(localStorage.getItem("sound_arch_v8") || "[]");
+if (saved.includes(prompt)) return;
+saved.unshift(prompt); localStorage.setItem("sound_arch_v8", JSON.stringify(saved.slice(0, 30))); renderSaved();
+}
+function useAsBase(index) {
+lastVals = { ...window.currentBatchResults[index].vals };
+buildPrompt(); renderFields();
+document.getElementById("batchSection").style.display = "none";
+document.getElementById("promptBox").style.display = "block";
+document.getElementById("saveBtn").style.display = "block";
+}
+function copyPrompt() {
+if (!currentPrompt) return;
+navigator.clipboard.writeText(currentPrompt).then(() => {
+const btn = document.getElementById("copyBtn");
+btn.textContent = "Copied ✓"; btn.classList.add("copied");
+setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 2000);
+}).catch(() => { const ta = document.createElement("textarea"); ta.value = currentPrompt; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); document.body.removeChild(ta); });
+}
+function savePrompt() {
+if (!currentPrompt) return;
+let saved = JSON.parse(localStorage.getItem("sound_arch_v8") || "[]");
+if (saved.includes(currentPrompt)) return;
+saved.unshift(currentPrompt); localStorage.setItem("sound_arch_v8", JSON.stringify(saved.slice(0, 30))); renderSaved();
+}
+function deleteSaved(i) {
+let saved = JSON.parse(localStorage.getItem("sound_arch_v8") || "[]");
+saved.splice(i, 1); localStorage.setItem("sound_arch_v8", JSON.stringify(saved)); renderSaved();
+}
+function renderSaved() {
+const saved = JSON.parse(localStorage.getItem("sound_arch_v8") || "[]");
+const section = document.getElementById("savedSection"); const list = document.getElementById("savedList");
+if (saved.length === 0) { section.style.display = "none"; return; }
+section.style.display = "block";
+list.innerHTML = saved.map((p, i) => `<div class="saved-item"><div style="flex:1;word-break:break-all" data-index="${i}">${p}</div><button onclick="deleteSaved(${i});event.stopImmediatePropagation()" style="background:transparent;border:none;color:#ef4444;font-size:12px;cursor:pointer;padding:2px 6px;flex-shrink:0">✖</button></div>`).join("");
+document.querySelectorAll(".saved-item > div:first-child").forEach(el => { el.onclick = () => { navigator.clipboard.writeText(saved[el.dataset.index]); }; });
+}
 renderSaved();
 </script>
 
